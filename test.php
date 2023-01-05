@@ -1,13 +1,12 @@
-<?php
-	// include 'dbconfig.php';
-	// if (!empty($_SERVER['HTTPS']) && ('on' == $_SERVER['HTTPS'])) {
-	// 	$uri = 'https://';
-	// } else {
-	// 	$uri = 'http://';
-	// }
-	// $uri .= $_SERVER['HTTP_HOST'];
-	// header('Location: '.$uri.'/dashboard/');
-	echo "testingg";
-	exit;
+<?php 
+ Echo "<html>";
+Echo
+"<title>HTML With PHP</title>";
+Echo
+"<b>My Example</b>";
+//your php code here
+Print
+"<i>Print works too!</i>"; 
 ?>
-Something is wrong with the XAMPP installation :-(
+
+
