@@ -1,3 +1,5 @@
+<!-- Type usr/local/mysql/bin/mysql -u root -p to access mysql in CL -->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +18,26 @@
         max-width: fit-content;
         margin: 5px;
         margin-left: 10px;
+        box-sizing:content-box;
+        box-shadow: -5px 5px 15px rgb(21, 30, 34);
+        border-radius: 30px;
+        display: inline-block;
+    }
+
+    #earnSpend {
+        color: rgb(238, 227, 255); 
+        font-family: sans-serif; 
+        font-style: italic; 
+        font-size:40px;     
+        font-weight: 600; 
+        background-color: #3B263B;
+        padding: 10px;
+        padding-right: 30px;
+        padding-left: 20px;
+        max-width: fit-content;
+        margin: 5px;
+        margin-left: 10px;
+        margin-top: 40px;
         box-sizing:content-box;
         box-shadow: -5px 5px 15px rgb(21, 30, 34);
         border-radius: 30px;
@@ -54,6 +76,17 @@
         box-shadow: -6px 6px #070c24 ;
     }
 
+    #lineTitle {
+        height: 10px;
+        margin-right: 65px;
+        max-width: 10000px;
+        margin-left: 65px;
+        margin-top: 20px;
+        margin-bottom: -15px;
+        background: #4B364F;
+        box-shadow: -6px 6px #2A0A35 ;
+    }
+
 </style>
 <title>Test Page</title>
 </head>
@@ -62,6 +95,10 @@
     <div id="mainDisplay">Total : $8,018.53</div>
     <div id="mainDisplay">Savings : $7,018.00</div>
     <div id="mainDisplay">Free Spend : $1,000.53</div>
+    <div id="lineTitle"></div>
+    <div id="earnSpend"><a href="/moneyTracker/earn.php"; style="color: rgb(238, 227, 255); text-decoration: none">EARN</a></div>
+    <div id="earnSpend"><a href="/moneyTracker/spend.php"; style="color: rgb(238, 227, 255); text-decoration: none">SPEND</a></div>
+
     <div id="title">Description of what I used it for</div>
     <div id="Test">Info Here $57.35</div>
     <div id="line1"></div>
@@ -73,7 +110,7 @@
             $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
             $sql = 'SELECT id, numOfSomething, date, location, title
                 FROM testTable
-                ORDER BY date';
+                ORDER BY id DESC';
             $q = $conn->query($sql);
             $q->setFetchMode(PDO::FETCH_ASSOC);
 

@@ -32,26 +32,25 @@
                 }
             }
 
-            public function test() {
+            public function printRows() {
                 $sql = 'SELECT id, numOfSomething, date, location, title
-                FROM testTable
-                ORDER BY date';
-            $q = $this->pdo->query($sql);
-            $q->setFetchMode(PDO::FETCH_ASSOC);
+                    FROM testTable
+                    ORDER BY id DESC';
+                $q = $this->pdo->query($sql);
+                $q->setFetchMode(PDO::FETCH_ASSOC);
 
-            while ($r = $q->fetch()) { ?>
-                <div> <?php echo sprintf('%s <br/>', $r['id']); ?></div>
-                <div> <?php echo sprintf('%s <br/>', $r['numOfSomething']); ?></div>
-                <div> <?php echo sprintf('%s <br/>', $r['date']); ?></div>
-                <div> <?php echo sprintf('%s <br/>', $r['location']); ?></div>
-                <div> <?php echo sprintf('%s <br/>', $r['title']); ?></div>
-            <?php }
+                while ($r = $q->fetch()) { ?>
+                    <div> <?php echo sprintf('%s <br/>', $r['id']); ?></div>
+                    <div> <?php echo sprintf('%s <br/>', $r['numOfSomething']); ?></div>
+                    <div> <?php echo sprintf('%s <br/>', $r['date']); ?></div>
+                    <div> <?php echo sprintf('%s <br/>', $r['location']); ?></div>
+                    <div> <?php echo sprintf('%s <br/>', $r['title']); ?></div>
+                <?php }
             }
 
             public function insert($num, $title) {
 
                 $task = array(':number' => $num,
-                    ':date' => "now()",
                     ':location' => "Earth",
                     ':title' => $title);
 
@@ -63,7 +62,7 @@
                         )
                         Values (
                             :number,
-                            :date,
+                            now(),
                             :location,
                             :title
                         )";
@@ -71,7 +70,12 @@
 
                 $q = $this->pdo->prepare($sql);
                 ?><div>test 3</div><?php
-                return $q->execute($task);
+                try {
+                    return $q->execute($task);
+                }
+                catch (Exception $e) {
+                    echo $e->getMessage();
+                }
             }
         }
 
@@ -79,7 +83,7 @@
         $title = "This is the second row";
         $object = new insertData($host, $dbname, $username, $password);
         ?><div>Test</div><?php
-        $object->test();
+        $object->printRows();
         $object->insert($num, $title);
     ?>
     <div>Added Successfully</div>
