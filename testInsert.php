@@ -33,40 +33,56 @@
             }
 
             public function printRows() {
-                $sql = 'SELECT id, numOfSomething, date, location, title
-                    FROM testTable
+                $sql = 'SELECT id, title, description, location, date, amount
+                    FROM money
                     ORDER BY id DESC';
                 $q = $this->pdo->query($sql);
                 $q->setFetchMode(PDO::FETCH_ASSOC);
 
                 while ($r = $q->fetch()) { ?>
                     <div> <?php echo sprintf('%s <br/>', $r['id']); ?></div>
-                    <div> <?php echo sprintf('%s <br/>', $r['numOfSomething']); ?></div>
-                    <div> <?php echo sprintf('%s <br/>', $r['date']); ?></div>
-                    <div> <?php echo sprintf('%s <br/>', $r['location']); ?></div>
                     <div> <?php echo sprintf('%s <br/>', $r['title']); ?></div>
+                    <div> <?php echo sprintf('%s <br/>', $r['description']); ?></div>
+                    <div> <?php echo sprintf('%s <br/>', $r['location']); ?></div>
+                    <?php 
+                        $year = substr($r['date'], 0, 4);
+                        $month = substr($r['date'], 5, -3);
+                        $day = substr($r['date'], 8, 9);
+                        $dateTemp = $month;
+                        $dateTemp .= "/";
+                        $dateTemp = $day;
+                        $dateTemp .= "/";
+                        $dateTemp = $year;
+                        $date = date("F j, Y", strtotime($dateTemp)); ?>
+
+                    <div> <?php echo sprintf('%s <br/>', $date); ?></div>
+                    <div> <?php echo "$ ".number_format($r['amount'], 2); ?></div>
                 <?php }
             }
 
-            public function insert($num, $title) {
+            public function insert($title, $description, $location, $amount) {
 
-                $task = array(':number' => $num,
-                    ':location' => "Earth",
-                    ':title' => $title);
+                $task = array(':title' => $title,
+                    ':description' => $description,
+                    ':location' => $location,
+                    ':amount' => $amount
+                );
 
-                $sql = "INSERT INTO testTable (
-                            numOfSomething,
-                            date,
+                $sql = "INSERT INTO money (
+                            title,
+                            description,
                             location,
-                            title
+                            date,
+                            amount
                         )
                         Values (
-                            :number,
-                            now(),
+                            :title,
+                            :description,
                             :location,
-                            :title
+                            now(),
+                            :amount
                         )";
-                ?><div>test 2</div><?php
+                ?><div><?php echo $location ?></div><?php
 
                 $q = $this->pdo->prepare($sql);
                 ?><div>test 3</div><?php
@@ -79,12 +95,15 @@
             }
         }
 
-        $num = 20;
-        $title = "This is the second row";
+        $title = "Test";
+        $description = "Test Description";
+        $location = 1;
+        $amount = 12345.67;
+
         $object = new insertData($host, $dbname, $username, $password);
         ?><div>Test</div><?php
         $object->printRows();
-        $object->insert($num, $title);
+        $object->insert($title, $description, $location, $amount);
     ?>
     <div>Added Successfully</div>
 </body>
