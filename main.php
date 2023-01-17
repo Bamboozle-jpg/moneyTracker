@@ -3,155 +3,95 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-    body {background-color: #232323;}
-    #mainDisplay {
-        color: rgb(227, 244, 255); 
-        font-family: sans-serif; 
-        font-style: italic; 
-        font-size:40px;     
-        font-weight: 600; 
-        background-color: #26263b;
-        padding: 10px;
-        padding-right: 30px;
-        padding-left: 20px;
-        max-width: fit-content;
-        margin: 5px;
-        margin-left: 10px;
-        box-sizing:content-box;
-        box-shadow: -5px 5px 15px rgb(21, 30, 34);
-        border-radius: 30px;
-        display: inline-block;
-    }
-
-    #earnSpend {
-        color: rgb(238, 227, 255); 
-        font-family: sans-serif; 
-        font-style: italic; 
-        font-size:40px;     
-        font-weight: 600; 
-        background-color: #3B263B;
-        padding: 10px;
-        padding-right: 30px;
-        padding-left: 20px;
-        max-width: fit-content;
-        margin: 5px;
-        margin-left: 10px;
-        margin-top: 40px;
-        box-sizing:content-box;
-        box-shadow: -5px 5px 15px rgb(21, 30, 34);
-        border-radius: 30px;
-        display: inline-block;
-    }
-
-    #title {
-        color: rgb(138, 165, 193); 
-        font-family: sans-serif; 
-        font-style: italic; 
-        font-size: 25px; 
-        font-weight: 900; 
-        margin-top: 35px;
-        margin-left: 35px;
-    }
-
-    #amount {
-        color: rgb(196, 215, 221); 
-        font-family: sans-serif; 
-        font-style: italic; 
-        font-size: 25px; 
-        font-weight: 200; 
-        margin-top: 10px;
-        margin-left: 35px;
-        margin-right: 5px;
-        margin-bottom: 0px;
-        padding-right: 30px;
-        width: 150px;
-        display: inline-block;
-    }
-
-    #date {
-        color: rgb(196, 215, 221); 
-        font-family: sans-serif; 
-        font-style: italic; 
-        font-size: 25px; 
-        font-weight: 200; 
-        margin-top: 10px;
-        margin-left: 35px;
-        margin-right: 0px;
-        margin-bottom: 0px;
-        padding-right: 30px;
-        display: inline-block;
-        width: 200px
-    }
-
-    #location {
-        color: rgb(196, 215, 221); 
-        font-family: sans-serif; 
-        font-style: italic; 
-        font-size: 25px; 
-        font-weight: 200; 
-        margin-top: 10px;
-        margin-left: 10px;
-        margin-right: 35px;
-        margin-bottom: 0px;
-        padding-right: 30px;
-        display: inline-block;
-        width: 200px
-    }
-
-    #description {
-        color: rgb(196, 215, 221); 
-        font-family: sans-serif; 
-        font-style: italic; 
-        font-size: 25px; 
-        font-weight: 200; 
-        margin-top: 10px;
-        margin-left: 35px;
-        margin-right: 35px;
-        margin-bottom: 0px;
-        padding-right: 30px;
-    }
-
-    #line1 {
-        height: 10px;
-        margin-right: 35px;
-        max-width: 1000px;
-        margin-left: 65px;
-        margin-top: 20px;
-        margin-bottom: -15px;
-        background: rgb(60, 67, 91);
-        box-shadow: -6px 6px #070c24 ;
-    }
-
-    #lineTitle {
-        height: 10px;
-        margin-right: 65px;
-        max-width: 10000px;
-        margin-left: 65px;
-        margin-top: 20px;
-        margin-bottom: -15px;
-        background: #4B364F;
-        box-shadow: -6px 6px #2A0A35 ;
-    }
-
-</style>
+<link rel="stylesheet" href="stylesheet.css">
 <title>Test Page</title>
 </head>
 
 <body>
-    <div id="mainDisplay">Total : $8,018.53</div>
-    <div id="mainDisplay">Savings : $7,018.00</div>
-    <div id="mainDisplay">Free Spend : $1,000.53</div>
+    <?php
+        include 'dbconfig.php';
+
+        $total = 0;     //Calculated
+        $savings = 0;   //ID = 0
+        $freeSpend = 0; //Calculated
+        $wallet = 0;    //ID = 1
+        $drawer = 0;    //ID = 2
+        $checking = 0;  //ID = 3
+        $venmo = 0;     //ID = 4
+
+        try {
+            $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+            $sql = 'SELECT location, amount
+                FROM money
+                ORDER BY location DESC';
+            $q = $conn->query($sql);
+            $q->setFetchMode(PDO::FETCH_ASSOC);
+
+            while ($r = $q->fetch()) {
+                if ($r['location'] == 0) {
+                    $savings += $r['amount'];
+                } elseif ($r['location'] == 1) {
+                    $wallet += $r['amount'];
+                } elseif ($r['location'] == 2) {
+                    $drawer += $r['amount'];
+                } elseif ($r['location'] == 3) {
+                    $checking += $r['amount'];
+                } elseif ($r['location'] == 4) {
+                    $venmo += $r['amount'];
+                }
+                // "$ ".number_format($savings, 2)
+            }
+        } catch (PDOException $pe) {
+            die("Could not connect to the database $dbname :" . $pe->getMessage());
+        }
+
+        $freeSpend += $wallet;
+        $freeSpend += $drawer;
+        $freeSpend += $checking;
+        $freeSpend += $venmo;
+        $total += $freeSpend;
+        $total += $savings;
+    ?>
+    <div id="mainDisplay">Total : <?php echo "$ ".number_format($total, 2) ?></div>
+    <div id="mainDisplay">Savings : <?php echo "$ ".number_format($savings, 2) ?></div>
+    <div id="mainDisplay">Free Spend : <?php echo "$ ".number_format($freeSpend, 2) ?></div>
+    <div id="optionalDisplay">Wallet : <?php echo "$ ".number_format($wallet, 2) ?></div>
+    <div id="optionalDisplay">Drawer : <?php echo "$ ".number_format($drawer, 2) ?></div>
+    <div id="optionalDisplay">Checking : <?php echo "$ ".number_format($checking, 2) ?></div>
+    <div id="optionalDisplay">Venmo : <?php echo "$ ".number_format($venmo, 2) ?></div>
     <div id="lineTitle"></div>
     <div id="earnSpend"><a href="/moneyTracker/earn.php"; style="color: rgb(238, 227, 255); text-decoration: none">EARN</a></div>
     <div id="earnSpend"><a href="/moneyTracker/spend.php"; style="color: rgb(238, 227, 255); text-decoration: none">SPEND</a></div>
+    <button id="earnSpend" onclick="myFunction()">Show/Hide Details</button>
+    <script>
 
-    <div id="title">Description of what I used it for</div>
-    <div id="description">Info Here $57.35</div>
-    <div id="line1"></div>
-    
+        function myFunction() {
+
+            var elms = document.querySelectorAll("[id='optionalDisplay']");
+            for(var i = 0; i < elms.length; i++) {
+                if (elms[i].style.display === "none") {
+                    elms[i].style.display = "inline-block";
+                } else {
+                    elms[i].style.display = "none";
+                }
+            }
+        }
+
+        function openPage($test) {
+            if ($test == 15) {
+                var elms = document.querySelectorAll("[id='optionalDisplay']");
+                for(var i = 0; i < elms.length; i++) {
+                    if (elms[i].style.display === "none") {
+                        elms[i].style.display = "inline-block";
+                    } else {
+                        elms[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+
     <?php
-        include 'dbconfig.php';
 
         try {
             $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
@@ -176,7 +116,22 @@
                         $date = date("F j, Y", strtotime($dateTemp)); 
                 ?>
                 <div id='date'> <?php echo sprintf('%s <br/>', $date); ?></div>
-                <div id='location'> <?php echo sprintf('%s <br/>', $r['location']); ?></div>
+                <div id='location'> <?php 
+                    if ($r['location'] == 0) {
+                        echo sprintf('%s <br/>', "Savings"); 
+                    } elseif ($r['location'] == 1) {
+                        echo sprintf('%s <br/>', "Wallet"); 
+                    } elseif ($r['location'] == 2) {
+                        echo sprintf('%s <br/>', "Drawer"); 
+                    } elseif ($r['location'] == 3) {
+                        echo sprintf('%s <br/>', "Checking"); 
+                    } elseif ($r['location'] == 4) {
+                        echo sprintf('%s <br/>', "Venmo"); 
+                    }
+                ?></div>
+                <button id='X' onclick="openPage(<?php echo $r['id']?>)">❌</button> 
+                <button id='X' href="#popupDel">WOO!</button>
+                <div id='description'> <?php echo $r['id'] ?> </div>
                 <div id='description'> <?php echo sprintf('%s', $r['description']); ?></div>
                 <div id="line1"></div>
             <?php }
@@ -185,12 +140,9 @@
         }
     ?>
 
-    <div id="title">Second description of what I used it for</div>
-    <div id="description">More info Here $32.35</div>
-    <div id="line1"></div>
-    <div id="title">Third description of what I used it for</div>
-    <div id="description">Even more info Here $21.35</div>
-    <div id="line1"></div>
+    <div id="popupDel" class="overlay">
+        <div class="popup"
+    </div>
 </body>
 
 </html>

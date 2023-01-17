@@ -95,10 +95,10 @@
             }
         }
 
-        $title = "Test";
-        $description = "Test Description";
-        $location = 1;
-        $amount = 12345.67;
+        $title = "Babysitting";
+        $description = "For the people yay";
+        $location = 0;
+        $amount = 900.30;
 
         $object = new insertData($host, $dbname, $username, $password);
         ?><div>Test</div><?php
