@@ -113,12 +113,12 @@
                 <?php 
                         $year = substr($r['date'], 0, 4);
                         $month = substr($r['date'], 5, -3);
-                        $day = substr($r['date'], 8, 9);
+                        $day = substr($r['date'], 8, 10);
                         $dateTemp = $month;
                         $dateTemp .= "/";
-                        $dateTemp = $day;
+                        $dateTemp .= $day;
                         $dateTemp .= "/";
-                        $dateTemp = $year;
+                        $dateTemp .= $year;
                         $date = date("F j, Y", strtotime($dateTemp)); 
                 ?>
                 <div id='date'> <?php echo sprintf('%s <br/>', $date); ?></div>
@@ -140,7 +140,6 @@
                         ?>  <a id='X' class="button" href="#popupDel">❌</a>  <?php
                     } 
                 ?>
-                <div id='description'> <?php echo $r['id'] ?> </div>
                 <div id='description'> <?php echo sprintf('%s', $r['description']); ?></div>
                 <div id="line1"></div>
             <?php }
@@ -154,7 +153,9 @@
         <h2><?php echo $r['id']?></h2>
         <a class="close" href="#">&times;</a>
         <div class="content">
-            Thank to pop me out of that button, but now i'm done so you can close this window.
+            <div id='description'>
+                Thank to pop me out of that button, but now i'm done so you can close this window.
+            </div>
         </div>
     </div>
 </div>

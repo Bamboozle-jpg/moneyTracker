@@ -184,11 +184,11 @@ body {background-color: #232323;}
     }
 
 .popup {
-    margin: 70px auto;
-    padding: 20px;
+    margin: 5000px auto;
+    padding: 4000px;
     background: #232323;
     border-radius: 5px;
-    width: 30%;
+    width: 70%;
     position: relative;
     transition: all 5s ease-in-out;
 }
@@ -212,6 +212,14 @@ body {background-color: #232323;}
         color: rgb(240, 240, 240);
     }
     .popup .content {
-        max-height: 30%;
-        overflow: auto;
+        color: rgb(196, 215, 221); 
+        font-family: sans-serif; 
+        font-style: italic; 
+        font-size: 25px; 
+        font-weight: 200; 
+        margin-top: 10px;
+        margin-left: 35px;
+        margin-right: 350px;
+        margin-bottom: 0px;
+        padding-right: 30px;
     }
