@@ -20,6 +20,12 @@
         $venmo = 0;     //ID = 4
 
         try {
+            $connection = mysqli_connect($host, $username, "", $dbname);
+            $query = "SELECT id FROM money";
+            $result = mysqli_query($connection, $query);
+            $count = mysqli_num_rows($result);
+            mysqli_close($connection);
+
             $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
             $sql = 'SELECT location, amount
                 FROM money
@@ -129,8 +135,11 @@
                         echo sprintf('%s <br/>', "Venmo"); 
                     }
                 ?></div>
-                <button id='X' onclick="openPage(<?php echo $r['id']?>)">❌</button> 
-                <button id='X' href="#popupDel">WOO!</button>
+                <?php
+                    if ($r['id'] == $count) {
+                        ?>  <a id='X' class="button" href="#popupDel">❌</a>  <?php
+                    } 
+                ?>
                 <div id='description'> <?php echo $r['id'] ?> </div>
                 <div id='description'> <?php echo sprintf('%s', $r['description']); ?></div>
                 <div id="line1"></div>
@@ -140,9 +149,15 @@
         }
     ?>
 
-    <div id="popupDel" class="overlay">
-        <div class="popup"
+<div id="popupDel" class="overlay">
+    <div class="popup">
+        <h2><?php echo $r['id']?></h2>
+        <a class="close" href="#">&times;</a>
+        <div class="content">
+            Thank to pop me out of that button, but now i'm done so you can close this window.
+        </div>
     </div>
+</div>
 </body>
 
 </html>
