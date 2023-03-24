@@ -87,7 +87,7 @@
                 $q = $this->pdo->prepare($sql);
                 ?><div>test 3</div><?php
                 try {
-                    return $q->execute($task);
+                    echo $q->execute($task);
                 }
                 catch (Exception $e) {
                     echo $e->getMessage();
@@ -95,10 +95,10 @@
             }
         }
 
-        $title = "Babysitting";
-        $description = "For the people yay";
-        $location = 0;
-        $amount = 900.30;
+        $title = "Testing 11";
+        $description = "Beep Boop";
+        $location = 2;
+        $amount = 430.30;
 
         $object = new insertData($host, $dbname, $username, $password);
         ?><div>Test</div><?php
