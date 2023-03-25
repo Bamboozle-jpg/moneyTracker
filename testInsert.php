@@ -98,7 +98,7 @@
         $title = "Testing 11";
         $description = "Beep Boop";
         $location = 2;
-        $amount = 430.30;
+        $amount = 130.30;
 
         $object = new insertData($host, $dbname, $username, $password);
         ?><div>Test</div><?php

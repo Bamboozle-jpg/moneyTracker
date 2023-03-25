@@ -57,6 +57,7 @@ body {background-color: #232323;}
     display: inline-block;
     border-style: none;
     outline-style: none;
+    cursor: pointer;
 }
     #earnSpend:hover {
         background-color: #582d58;
@@ -88,6 +89,7 @@ body {background-color: #232323;}
     border-style: none;
     outline-style: none;
     text-decoration: none;
+    cursor: pointer;
 }
     #delEntry:hover {
         background-color: #582d58;
@@ -98,6 +100,7 @@ body {background-color: #232323;}
     }
 
 #cancelDel {
+
     color: rgb(255, 255, 255); 
     font-family: sans-serif; 
     font-style: italic; 
@@ -119,6 +122,7 @@ body {background-color: #232323;}
     border-style: none;
     outline-style: none;
     text-decoration: none;
+    cursor: pointer;
 }
     #cancelDel:hover {
         background-color: #666666;
@@ -132,7 +136,7 @@ body {background-color: #232323;}
     color: rgb(138, 165, 193); 
     font-family: sans-serif; 
     font-style: italic; 
-    font-size: 25px; 
+    font-size: 35px; 
     font-weight: 900; 
     margin-top: 35px;
     margin-left: 35px;
@@ -142,7 +146,7 @@ body {background-color: #232323;}
     color: rgb(223, 235, 238); 
     font-family: sans-serif; 
     font-style: italic; 
-    font-size: 35px; 
+    font-size: 45px; 
     font-weight: 900; 
     margin-top: 35px;
     margin-left: 35px;
@@ -152,7 +156,7 @@ body {background-color: #232323;}
     color: rgb(196, 215, 221); 
     font-family: sans-serif; 
     font-style: italic; 
-    font-size: 25px; 
+    font-size: 35px; 
     font-weight: 200; 
     margin-top: 10px;
     margin-left: 35px;
@@ -162,27 +166,56 @@ body {background-color: #232323;}
     width: 150px;
     display: inline-block;
 }
+    #amount-red {
+        color: rgb(211, 159, 159); 
+        font-family: sans-serif; 
+        font-style: italic; 
+        font-size: 35px; 
+        font-weight: 200; 
+        margin-top: 10px;
+        margin-left: 35px;
+        margin-right: 5px;
+        margin-bottom: 0px;
+        padding-right: 30px;
+        width: 150px;
+        display: inline-block;
+    }
+    #amount-green {
+        color: rgb(174, 219, 173); 
+        font-family: sans-serif; 
+        font-style: italic; 
+        font-size: 35px; 
+        font-weight: 200; 
+        margin-top: 10px;
+        margin-left: 35px;
+        margin-right: 5px;
+        margin-bottom: 0px;
+        padding-right: 30px;
+        width: 150px;
+        display: inline-block;
+    }
+
 
 #date {
     color: rgb(196, 215, 221); 
     font-family: sans-serif; 
     font-style: italic; 
-    font-size: 25px; 
+    font-size: 35px; 
     font-weight: 200; 
     margin-top: 10px;
     margin-left: 35px;
     margin-right: 0px;
     margin-bottom: 0px;
-    padding-right: 30px;
+    padding-right: 10px;
     display: inline-block;
-    width: 200px
+    width: 300px
 }
 
 #location {
     color: rgb(196, 215, 221); 
     font-family: sans-serif; 
     font-style: italic; 
-    font-size: 25px; 
+    font-size: 35px; 
     font-weight: 200; 
     margin-top: 10px;
     margin-left: 35px;
@@ -190,32 +223,46 @@ body {background-color: #232323;}
     margin-bottom: 0px;
     padding-right: 30px;
     display: inline-block;
-    width: 200px
+    width: 100px
 }
 
 #X {
-    color: rgb(196, 215, 221); 
+    color: rgb(238, 227, 255); 
     font-family: sans-serif; 
-    font-size: 20px; 
-    font-weight: 200; 
-    margin-top: 00px;
-    margin-left: 35px;
-    margin-right: 35px;
-    margin-bottom: 0px;
-    padding-right: 30px;
+    font-style: italic; 
+    font-size:30px;     
+    font-weight: 600; 
+    background-color: #3B263B;
+    padding: 10px;
+    padding-right: 25px;
+    padding-left: 20px;
+    max-width: fit-content;
+    margin: 5px;
+    margin-left: 30px;
+    margin-top: 40px;
+    margin-bottom:0px;
+    box-sizing:content-box;
+    box-shadow: 5px 5px 5px rgb(34, 21, 30);
+    border-radius: 30px;
     display: inline-block;
-    width: 20px;
-    background-color: transparent;
     border-style: none;
     outline-style: none;
     text-decoration: none;
+    cursor: pointer;
 }
+    #X:hover {
+        background-color: #582d58;
+    }
+    #X:active {
+        background-color: #582d58;
+        box-shadow: 1px 1px 1px rgb(34, 21, 30);
+    }
 
 #description {
     color: rgb(196, 215, 221); 
     font-family: sans-serif; 
     font-style: italic; 
-    font-size: 25px; 
+    font-size: 34px; 
     font-weight: 200; 
     margin-top: 10px;
     margin-left: 35px;

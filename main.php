@@ -17,7 +17,7 @@
     transition: opacity 500ms;
     visibility: hidden;
     opacity: 0;
-    transition: all 1s ease-in-out;
+    transition: all .5s ease-in-out;
 }
     .overlay:target {
         visibility: visible;
@@ -179,7 +179,8 @@
             while ($r = $q->fetch()) { ?>
 
                 <div id='title'> <?php echo sprintf('%s <br/>', $r['title']); ?></div>
-                <div id='amount'> <?php echo "$ ".number_format($r['amount'], 2); ?></div>
+                <?php if ($r['amount'] > 0) { ?>  <div id='amount-green'> <?php echo "$ ".number_format($r['amount'], 2); ?></div> 
+                <?php } else { ?>  <div id='amount-red'> <?php echo "$ ".number_format($r['amount'], 2); ?></div> <?php } ?>
                 <?php 
                     //Prints the date
                     $year = substr($r['date'], 0, 4);
@@ -212,7 +213,7 @@
                 <?php
                     //Puts a X by the top of the list
                     if ($r['id'] == $highestID) {
-                        ?>  <a id='delEntry' class="button" href="#popupDel">X</a>  <?php
+                        ?>  <a id='X' class="button" href="#popupDel">X</a>  <?php
                     }
                 ?>
 
@@ -238,10 +239,12 @@
 
             while ($r = $q->fetch()) { 
             if ($r['id'] == $highestID) { 
+
                 $highestID = $r['id']; ?>
                 <div id='pTitle'>ARE YOU SURE YOU WANT TO DELETE THIS ENTRY?</div>
                 <div id='title'> <?php echo sprintf('%s <br/>', $r['title']); ?></div>
-                <div id='amount'> <?php echo "$ ".number_format($r['amount'], 2); ?></div>
+                <?php if ($r['amount'] > 0) { ?>  <div id='amount-green'> <?php echo "$ ".number_format($r['amount'], 2); ?></div> 
+                <?php } else { ?>  <div id='amount-red'> <?php echo "$ ".number_format($r['amount'], 2); ?></div> <?php } ?>
                 <?php 
                         $year = substr($r['date'], 0, 4);
                         $month = substr($r['date'], 5, -3);
