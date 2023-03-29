@@ -66,6 +66,64 @@ body {background-color: #232323;}
         background-color: #582d58;
         box-shadow: 1px 1px 1px rgb(34, 21, 30);
     }
+    #earnSpendRed {
+        color: rgb(211, 159, 159); 
+        font-family: sans-serif; 
+        font-style: italic; 
+        font-size:40px;     
+        font-weight: 600; 
+        background-color: #3B263B;
+        padding: 10px;
+        padding-right: 30px;
+        padding-left: 20px;
+        max-width: fit-content;
+        margin: 5px;
+        margin-left: 10px;
+        margin-top: 40px;
+        box-sizing:content-box;
+        box-shadow: 5px 5px 5px rgb(34, 21, 30);
+        border-radius: 30px;
+        display: inline-block;
+        border-style: none;
+        outline-style: none;
+        cursor: pointer;
+    }
+        #earnSpendRed:hover {
+            background-color: #582d58;
+        }
+        #earnSpendRed:active {
+            background-color: #582d58;
+            box-shadow: 1px 1px 1px rgb(34, 21, 30);
+        }
+    #earnSpendGreen {
+        color: rgb(174, 219, 173); 
+        font-family: sans-serif; 
+        font-style: italic; 
+        font-size:40px;     
+        font-weight: 600; 
+        background-color: #3B263B;
+        padding: 10px;
+        padding-right: 30px;
+        padding-left: 20px;
+        max-width: fit-content;
+        margin: 5px;
+        margin-left: 10px;
+        margin-top: 40px;
+        box-sizing:content-box;
+        box-shadow: 5px 5px 5px rgb(34, 21, 30);
+        border-radius: 30px;
+        display: inline-block;
+        border-style: none;
+        outline-style: none;
+        cursor: pointer;
+    }
+        #earnSpendGreen:hover {
+            background-color: #582d58;
+        }
+        #earnSpendGreen:active {
+            background-color: #582d58;
+            box-shadow: 1px 1px 1px rgb(34, 21, 30);
+        }
 
 #delEntry {
     color: rgb(238, 227, 255); 
@@ -239,8 +297,8 @@ body {background-color: #232323;}
     max-width: fit-content;
     margin: 5px;
     margin-left: 30px;
-    margin-top: 40px;
-    margin-bottom:0px;
+    margin-top: -30px;
+    margin-bottom: -30px;
     box-sizing:content-box;
     box-shadow: 5px 5px 5px rgb(34, 21, 30);
     border-radius: 30px;

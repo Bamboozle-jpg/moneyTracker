@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="stylesheet.css">
+<link rel="stylesheet" href="stylesheetMain.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js">
 </script>
 <style>
@@ -129,8 +129,8 @@
     <div id="optionalDisplay">Checking : <?php echo "$ ".number_format($checking, 2) ?></div>
     <div id="optionalDisplay">Venmo : <?php echo "$ ".number_format($venmo, 2) ?></div>
     <div id="lineTitle"></div>
-    <div id="earnSpend"><a href="/moneyTracker/earn.php"; style="color: rgb(238, 227, 255); text-decoration: none">EARN</a></div>
-    <div id="earnSpend"><a href="/moneyTracker/spend.php"; style="color: rgb(238, 227, 255); text-decoration: none">SPEND</a></div>
+    <div id="earnSpendGreen"><a href="/moneyTracker/earn.php"; style="color: rgb(238, 227, 255); text-decoration: none">EARN</a></div>
+    <div id="earnSpendRed"><a href="/moneyTracker/spend.php"; style="color: rgb(238, 227, 255); text-decoration: none">SPEND</a></div>
     <button id="earnSpend" onclick="displayToggle()">Show/Hide Details</button>
     <script>
         function displayToggle() {
@@ -145,7 +145,7 @@
         }
 
         //Called by Final delete button to call deleteItem.php to remove top item
-        function delTop(test) {
+        function delTop() {
             x = <?php echo $highestID ?>;
             try {
                 $.ajax({
@@ -269,10 +269,9 @@
                     } elseif ($r['location'] == 4) {
                         echo sprintf('%s <br/>', "Venmo"); 
                     }
-                    echo printf('First open : %b. <br/>', $firstOpen);
                 ?></div>
                 <div id='description'> <?php echo sprintf('%s', $r['description']); ?></div>
-                <button id="delEntry" onclick="delTop(<?php echo $highestID ?>)">Delete</button>
+                <button id="delEntry" onclick="delTop()">Delete</button>
                 <a id="cancelDel" href="#">Cancel</a>
             <?php }} ?>
         </div>
