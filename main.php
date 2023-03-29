@@ -1,4 +1,7 @@
-<!-- Type usr/local/mysql/bin/mysql -u root -p to access mysql in CL -->
+<!-- Type usr/local/mysql/bin/mysql -u root -p to access mysql in CL 
+Find this in Applications/XAMPP/xamppfiles/htdocs/moneyTracker
+Run mysql by going to manager-osx and run proFTD and Apache web server, but not MySQL database if you're already
+running it in CL. Then go to http://localhost/moneytracker/main.php# -->
 
 <!DOCTYPE html>
 <html>
